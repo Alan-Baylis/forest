@@ -1,0 +1,4 @@
+C:\Users\Samuel\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.postprocessing@2.1.0
+C:\Users\Samuel\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.render-pipelines.core@3.0.0-preview
+C:\Users\Samuel\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.render-pipelines.lightweight@3.0.0-preview
+C:\Users\Samuel\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.shadergraph@3.0.0-preview
