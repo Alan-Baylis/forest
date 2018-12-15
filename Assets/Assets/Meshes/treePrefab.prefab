@@ -3016,3 +3016,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topHeight: 20
   minimunHeight: 10
+  scaleModifier: 1

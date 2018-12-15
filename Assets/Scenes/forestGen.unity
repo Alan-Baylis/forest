@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b19ef361882124ca8c85f52cca80c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frecuency: 5
+  frecuency: 4
   xSize: 60
   zSize: 60
   density: 0
@@ -407,15 +407,15 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 664939509}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9de1cfa59564d934284716b901fa00e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4586039551099990, guid: a483460986d14d543972d1a6b0ee25e8, type: 2}
-  density: 0
-  population: 100
-  range: 10
+  prefab: {fileID: 4870668753200600, guid: 1e4ae915e392fff4f94e9192b8be82c2, type: 2}
+  density: 5
+  population: 40
+  range: 50
 --- !u!1 &1237792896
 GameObject:
   m_ObjectHideFlags: 0

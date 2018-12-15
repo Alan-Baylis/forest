@@ -85,9 +85,14 @@ public class terrainScript : MonoBehaviour {
         terrainGeo.RecalculateBounds();
         terrainGeo.RecalculateNormals();
 
+
+
+        //Assigning MeshCollider
         MeshCollider meshc = gameObject.AddComponent<MeshCollider>();
         meshc.sharedMesh = terrainGeo;
-        //meshc = terrainGeo;
+        
+
+
     }
 
    

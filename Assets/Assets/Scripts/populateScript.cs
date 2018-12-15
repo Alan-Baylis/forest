@@ -20,19 +20,21 @@ public class populateScript : MonoBehaviour {
         Vector3 defpos = new Vector3();
         int layerMask = 9;
 
-        for (int i=1; i<=range*density; i++) {
+
+        for (int i = 1; i <= range * density; i++)
+        {
 
             posran = new Vector3(Random.Range(-range, range), 0, Random.Range(-range, range));
 
             RaycastHit hit;
-            Ray upRay = new Ray(posran, Vector3.up*50);
+            Ray downRay = new Ray(posran + new Vector3(0,10,0), Vector3.down*50);
 
 
-            if (Physics.Raycast(upRay, out hit, Mathf.Infinity, layerMask))
+            if (Physics.Raycast(downRay, out hit, Mathf.Infinity, layerMask))
             {
-                Debug.Log("Hit");
-                defpos = posran + new Vector3(0, hit.distance, 0);
-                Debug.Log(hit.point);
+                //Debug.Log("Hit");
+                defpos = posran + new Vector3(0,(10-hit.distance), 0);
+                //Debug.Log(hit.point);
             }
             else
             {
@@ -41,19 +43,18 @@ public class populateScript : MonoBehaviour {
             }
 
 
-            Debug.DrawRay(posran, Vector3.up*50, Color.green, 15f);
+            //Debug.DrawRay(posran+Vector3.up*40, Vector3.down * 50, Color.green, 15f);
 
-            defpos = posran + new Vector3(0, hit.distance, 0);
-            
+            //defpos = posran + new Vector3(0, 10-hit.distance, 0);
+
 
             Instantiate(prefab, defpos, Quaternion.identity);
         }
 
     }
-	
-	// Update is called once per frame
-	void Update () {
 
+    // Update is called once per frame
+    void Update() {
+    }
 
-	}
 }

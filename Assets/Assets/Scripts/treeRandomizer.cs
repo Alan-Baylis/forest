@@ -7,7 +7,7 @@ public class treeRandomizer : MonoBehaviour {
     Vector3 randscale;
     public int topHeight = 20;
     public int minimunHeight = 10;
-
+    public float scaleModifier = 1;
     //public GameObject parentForest;
     
 
@@ -24,7 +24,7 @@ public class treeRandomizer : MonoBehaviour {
       
 
         float scaley = Random.Range(minimunHeight, topHeight);
-        float scalexz = Random.Range(5, 15);
+        float scalexz = Random.Range(5*scaleModifier, 15*scaleModifier);
 
         randscale = new Vector3(scalexz,scaley, scalexz);
         transform.localScale = randscale;
