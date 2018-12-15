@@ -12,6 +12,7 @@ public class terrainScript : MonoBehaviour {
     public int zSize = 60;
     public float density = 1;
     Vector3[] vertices;
+    Vector2[] uvs;
 
     // Use this for initialization
     void Awake() {
@@ -81,6 +82,17 @@ public class terrainScript : MonoBehaviour {
             }
         }
 
+        uvs = new Vector2[vertices.Length];
+
+        for (int i = 0, z = 0; z <= zSize; z++)
+        {
+            for (int x = 0; x <= xSize; x++, i++)
+            {
+                uvs[i] = new Vector2((float)x / xSize,(float) z / zSize);
+            }
+        }
+
+        terrainGeo.uv = uvs;
         terrainGeo.triangles = triangles;
         terrainGeo.RecalculateBounds();
         terrainGeo.RecalculateNormals();
