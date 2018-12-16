@@ -29,7 +29,7 @@ public class terrainScript : MonoBehaviour {
         //gameObject.layer = 9;
 
         //transform.Rotate((Vector3.right * 90f));
-        transform.position = new Vector3(-xSize / 2, transform.position.y, -zSize / 2);
+        transform.position = new Vector3((-xSize / 2), transform.position.y,(- zSize / 2));
         Generate();
 
     }

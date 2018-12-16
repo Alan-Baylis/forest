@@ -14,8 +14,8 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.764151, g: 0.16862746, b: 0.28475437, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -66,7 +66,7 @@ LightmapSettings:
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
-    m_TextureCompression: 1
+    m_TextureCompression: 0
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
@@ -142,9 +142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b19ef361882124ca8c85f52cca80c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frecuency: 4
-  xSize: 60
-  zSize: 60
+  frecuency: 10
+  xSize: 200
+  zSize: 200
   density: 0
 --- !u!23 &132743652
 MeshRenderer:
@@ -386,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4201217086578586, guid: 66956289f93042c48b78d7486f061733, type: 2}
   density: 5
+  rotation: 0
   population: 200
   range: 30
 --- !u!4 &664939511
@@ -413,7 +414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4870668753200600, guid: 1e4ae915e392fff4f94e9192b8be82c2, type: 2}
-  density: 5
+  density: 1
+  rotation: 1
   population: 40
   range: 50
 --- !u!1 &1237792896

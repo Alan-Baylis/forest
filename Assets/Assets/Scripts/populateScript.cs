@@ -10,8 +10,11 @@ public class populateScript : MonoBehaviour {
 
     public float density;
 
+    public bool rotation = false;
     public int population = 100;
     public float range = 50;
+
+    Quaternion rot = Quaternion.identity;
     
 
 	// Use this for initialization
@@ -35,6 +38,13 @@ public class populateScript : MonoBehaviour {
                 //Debug.Log("Hit");
                 defpos = posran + new Vector3(0,(10-hit.distance), 0);
                 //Debug.Log(hit.point);
+
+                if (rotation == true)
+                {
+                    //Vector3 newDir = Vector3.RotateTowards(Vector3.up, hit.normal,2.4f,0.0f);
+                    //transform.rotation = Quaternion.Euler(newDir);
+                    rot = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                }
             }
             else
             {
@@ -47,8 +57,10 @@ public class populateScript : MonoBehaviour {
 
             //defpos = posran + new Vector3(0, 10-hit.distance, 0);
 
+            
 
-            Instantiate(prefab, defpos, Quaternion.identity);
+            Instantiate(prefab, defpos, rot);
+
         }
 
     }
