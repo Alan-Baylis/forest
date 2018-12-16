@@ -14,10 +14,16 @@ public class populateScript : MonoBehaviour {
     public int population = 100;
     public float range = 50;
 
+    string objectserialized;
+
     List<Vector3> poslist = new List<Vector3>();
     List<Quaternion> rotlist = new List<Quaternion>();
+
+    [SerializeField]
     List<objectplaced> objlist = new List<objectplaced>();
 
+
+    [System.Serializable]
     public class objectplaced
     {
         public objectplaced(int _ID,Vector3 _position, Quaternion _rotation)
@@ -62,7 +68,6 @@ public class populateScript : MonoBehaviour {
             else
             {
                 //Debug.Log("Didnt");
-                //hit.distance = 5;
             }
 
 
@@ -73,6 +78,7 @@ public class populateScript : MonoBehaviour {
             objectplaced objgen = new objectplaced(i,defpos, rot);
             //objgen.position = defpos;
 
+
             objlist.Add(objgen);
 
             //Debug.Log(i);
@@ -82,6 +88,11 @@ public class populateScript : MonoBehaviour {
             Instantiate(prefab, defpos, rot);
 
         }
+
+
+         
+        //objectserialized = JsonUtility.ToJson(objlist);
+        
 
     }
 
