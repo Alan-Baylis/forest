@@ -14,16 +14,29 @@ public class populateScript : MonoBehaviour {
     public int population = 100;
     public float range = 50;
 
+    List<Vector3> poslist = new List<Vector3>();
+    List<Quaternion> rotlist = new List<Quaternion>();
+    List<objectplaced> objlist = new List<objectplaced>();
+
+    public class objectplaced
+    {
+        public objectplaced(int _ID,Vector3 _position, Quaternion _rotation)
+        {
+        }
+    }
+
+
     Quaternion rot = Quaternion.identity;
     
-
+   
 	// Use this for initialization
 	void Start () {
 
         Vector3 defpos = new Vector3();
         int layerMask = 9;
 
-
+        string name = this.name;
+        
         for (int i = 1; i <= range * density; i++)
         {
 
@@ -57,7 +70,14 @@ public class populateScript : MonoBehaviour {
 
             //defpos = posran + new Vector3(0, 10-hit.distance, 0);
 
-            
+            objectplaced objgen = new objectplaced(i,defpos, rot);
+            //objgen.position = defpos;
+
+            objlist.Add(objgen);
+
+            //Debug.Log(i);
+            //poslist.Add(defpos);
+            //rotlist.Add(rot);
 
             Instantiate(prefab, defpos, rot);
 
