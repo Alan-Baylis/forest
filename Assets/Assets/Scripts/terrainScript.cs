@@ -25,10 +25,6 @@ public class terrainScript : MonoBehaviour {
 	#endif
 
         
-
-        //gameObject.layer = 9;
-
-        //transform.Rotate((Vector3.right * 90f));
         transform.position = new Vector3((-xSize / 2), transform.position.y,(- zSize / 2));
         Generate();
 
@@ -42,15 +38,10 @@ public class terrainScript : MonoBehaviour {
     }
         
 
-    
-    //private void Awake()
-    //{        
-    //    Generate();
-    //}
 
 
     [ExecuteInEditMode]
-    private void Generate()
+    public void Generate()
     {
         Mesh terrainGeo = new Mesh();
 

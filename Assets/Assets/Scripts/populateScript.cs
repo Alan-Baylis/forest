@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System.IO;
 
 public class populateScript : MonoBehaviour {
@@ -12,7 +13,7 @@ public class populateScript : MonoBehaviour {
 
 	//Prefab
     public Transform prefab;
-    Vector3 posran;
+
 
     //Placing
 	public float density;
@@ -21,11 +22,11 @@ public class populateScript : MonoBehaviour {
 
     string objectserialized;
 
-    List<Vector3> poslist = new List<Vector3>();
-    List<Quaternion> rotlist = new List<Quaternion>();
+    //List<Vector3> poslist = new List<Vector3>();
+    //List<Quaternion> rotlist = new List<Quaternion>();
 
     [SerializeField]
-    List<objectplaced> objlist = new List<objectplaced>();
+    public List<objectplaced> objlist = new List<objectplaced>();
 
 
     [System.Serializable]
@@ -36,14 +37,16 @@ public class populateScript : MonoBehaviour {
     	public Vector3 position;
     	public Quaternion rotation;
     	public string prefabname;
+        public Transform prefab;
 
     	//[SerializableField]
-        public objectplaced(string prefabname,int idnum,Vector3 pos, Quaternion rot)
+        public objectplaced(string prefabname,int idnum,Vector3 pos, Quaternion rot,Transform pfab)
         {
         	this.prefabname = prefabname;
         	this.ID = idnum;
         	this.position = pos;
         	this.rotation = rot;
+            this.prefab = pfab;
          }
 
     }
@@ -58,7 +61,8 @@ public class populateScript : MonoBehaviour {
 
 		Placer();
 		if (save == true){
-        	saveMethod(objlist);
+            //saveMethod(objlist);
+            saveMethod();
         }
         
     }
@@ -67,7 +71,7 @@ public class populateScript : MonoBehaviour {
 
    	public WrappingClass loadMethod() {
 
-
+        
 
         var variable = new WrappingClass();
         string savepath = (Application.persistentDataPath + saveFilepath);
@@ -80,8 +84,9 @@ public class populateScript : MonoBehaviour {
    		return desjson;
    	}
 
-    void saveMethod(List<objectplaced> whattosave){
+    public void saveMethod(){// (List<objectplaced> whattosave){
 
+        List<objectplaced> whattosave = objlist;
     	//Debug.Log(Application.persistentDataPath);
         string savepath = (Application.persistentDataPath + saveFilepath);
 
@@ -99,12 +104,16 @@ public class populateScript : MonoBehaviour {
     		var loadedData = loadMethod();
 
     		for (int j = 1; j <= loadedData.wraplist.Count;j++){
-    			Debug.Log(j);
-    		}
+    			//Debug.Log(loadedData.wraplist[j-1].ID);
+                Instantiate(loadedData.wraplist[j - 1].prefab, loadedData.wraplist[j - 1].position, loadedData.wraplist[j - 1].rotation);
+            }
+
+
     	}
     	else{
 
-	    	Vector3 defpos = new Vector3();
+            Vector3 posran;
+            Vector3 defpos = new Vector3();
 	        int layerMask = 9;
 
 	        string name = this.name;
@@ -134,22 +143,21 @@ public class populateScript : MonoBehaviour {
 	            }
 
 	            //Updating list
-	            objectplaced objgen = new objectplaced(prefab.name,i,defpos, rot);
+	            objectplaced objgen = new objectplaced(prefab.name,i,defpos, rot, prefab);
 				objlist.Add(objgen);
 
 				//Instantiating prefab
 	            Instantiate(prefab, defpos, rot);
 
-	            if (objlist.Contains(objgen)){
-	            	Debug.Log("YES" + i );
-	            }
+	            //if (objlist.Contains(objgen)){
+	            //	Debug.Log("YES" + i );
+	            //}
 
 	        }
         } 
     }
 
-    // Update is called once per frame
-    void Update() {
-    }
+
+   
 
 }
