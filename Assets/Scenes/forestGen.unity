@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44073933, g: 0.255394, b: 0.07661228, a: 1}
+  m_IndirectSpecularColor: {r: 0.44066876, g: 0.2554954, b: 0.076599404, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -142,10 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b19ef361882124ca8c85f52cca80c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frecuency: 10
-  xSize: 200
-  zSize: 200
-  density: 0
+  frecuency: 4
+  xSize: 60
+  zSize: 60
+  density: 1
 --- !u!23 &132743652
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 664939511}
   - component: {fileID: 664939510}
   - component: {fileID: 664939512}
+  - component: {fileID: 664939513}
   m_Layer: 0
   m_Name: Forest
   m_TagString: Untagged
@@ -384,11 +385,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de1cfa59564d934284716b901fa00e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  save: 0
+  saveFilepath: /Save
   prefab: {fileID: 4201217086578586, guid: 66956289f93042c48b78d7486f061733, type: 2}
   density: 5
   rotation: 0
-  population: 200
-  range: 30
+  range: 50
+  objlist: []
 --- !u!4 &664939511
 Transform:
   m_ObjectHideFlags: 0
@@ -413,11 +416,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de1cfa59564d934284716b901fa00e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  save: 0
+  saveFilepath: /Save
   prefab: {fileID: 4870668753200600, guid: 1e4ae915e392fff4f94e9192b8be82c2, type: 2}
   density: 1
   rotation: 1
-  population: 40
   range: 50
+  objlist: []
+--- !u!114 &664939513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 664939509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 247442469, guid: f7b54ff4a43d4fcf81b4538b678e0bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SurfaceParent: {fileID: 0}
+  m_FreezeUpdates: 0
+  m_VolumeType: 1
+  m_SphereRadius: 2
+  m_HalfBoxExtents: {x: 4, y: 4, z: 4}
+  m_LodType: 1
+  m_NumUpdatesBeforeRemoval: 10
+  m_SecondsBetweenUpdates: 2.5
+  m_Layer: 0
+  m_Material: {fileID: 0}
+  m_EnableCollisions: 1
 --- !u!1 &1237792896
 GameObject:
   m_ObjectHideFlags: 0

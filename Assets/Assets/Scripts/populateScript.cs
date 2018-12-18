@@ -1,17 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class populateScript : MonoBehaviour {
 
 
+	//Saving 
+	public bool save = false;
+	public string saveFilepath = "/Save";
+
+	//Prefab
     public Transform prefab;
     Vector3 posran;
 
-    public float density;
-
-    public bool rotation = false;
-    public int population = 100;
+    //Placing
+	public float density;
+	public bool rotation = false;
     public float range = 50;
 
     string objectserialized;
@@ -26,15 +31,37 @@ public class populateScript : MonoBehaviour {
     [System.Serializable]
     public class objectplaced
     {
-        public objectplaced(int _ID,Vector3 _position, Quaternion _rotation)
+
+    	public int ID;
+    	public Vector3 position;
+    	public Quaternion rotation;
+    	public string prefabname;
+
+    	//[SerializableField]
+        public objectplaced(string prefabname,int idnum,Vector3 pos, Quaternion rot)
         {
-        }
+        	this.prefabname = prefabname;
+        	this.ID = idnum;
+        	this.position = pos;
+        	this.rotation = rot;
+         }
+
     }
 
 
     Quaternion rot = Quaternion.identity;
     
    
+    void SaveMethod(List<objectplaced> whattosave){
+
+    	Debug.Log(Application.persistentDataPath);
+        string savepath = (Application.persistentDataPath + saveFilepath);
+
+        string dataAsJson = JsonUtility.ToJson(whattosave);
+
+        File.WriteAllText(savepath + "data.json", dataAsJson);
+    }
+
 	// Use this for initialization
 	void Start () {
 
@@ -67,29 +94,26 @@ public class populateScript : MonoBehaviour {
             }
             else
             {
-                //Debug.Log("Didnt");
+                //Debug.Log(i + "didn't hit");
             }
 
+            //Updating list
+            objectplaced objgen = new objectplaced(prefab.name,i,defpos, rot);
+			objlist.Add(objgen);
 
-            //Debug.DrawRay(posran+Vector3.up*40, Vector3.down * 50, Color.green, 15f);
+			//Debug.Log(objlist[1]);
+            //SaveMethod(objlist);
 
-            //defpos = posran + new Vector3(0, 10-hit.distance, 0);
-
-            objectplaced objgen = new objectplaced(i,defpos, rot);
-            //objgen.position = defpos;
-
-
-            objlist.Add(objgen);
-
-            //Debug.Log(i);
-            //poslist.Add(defpos);
-            //rotlist.Add(rot);
-
+			//Debug.Log(defpos);
+			//Instantiating prefab
             Instantiate(prefab, defpos, rot);
+
 
         }
 
+        
 
+        SaveMethod(objlist);
          
         //objectserialized = JsonUtility.ToJson(objlist);
         

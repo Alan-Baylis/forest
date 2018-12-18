@@ -18,11 +18,11 @@ public class terrainScript : MonoBehaviour {
     void Awake() {
 
 
-        populateScript.objec
+        
 
     #if UNITY_EDITOR
         UnityEditor.SceneView.FocusWindowIfItsOpen(typeof(UnityEditor.SceneView));
-#endif
+	#endif
 
         
 
