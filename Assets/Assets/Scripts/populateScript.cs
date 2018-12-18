@@ -5,10 +5,10 @@ using System.IO;
 
 public class populateScript : MonoBehaviour {
 
-
 	//Saving 
 	public bool save = false;
-	public string saveFilepath = "/Save";
+	public bool load = true;
+	public string saveFilepath = "/Save/";
 
 	//Prefab
     public Transform prefab;
@@ -48,76 +48,104 @@ public class populateScript : MonoBehaviour {
 
     }
 
-
+    public class WrappingClass {
+    	public List<objectplaced> wraplist;
+	}
+    
     Quaternion rot = Quaternion.identity;
     
-   
-    void SaveMethod(List<objectplaced> whattosave){
+    void Start () {
 
-    	Debug.Log(Application.persistentDataPath);
+		Placer();
+		if (save == true){
+        	saveMethod(objlist);
+        }
+        
+    }
+   
+   	WrappingClass desjson = new WrappingClass();
+
+   	public WrappingClass loadMethod() {
+
+
+
+        var variable = new WrappingClass();
+        string savepath = (Application.persistentDataPath + saveFilepath);
+       
+       	var inputString = File.ReadAllText(savepath + prefab.name + ".json");
+
+		//var desjson = JsonUtility.FromJson<WrappingClass>(inputString);
+		WrappingClass desjson = JsonUtility.FromJson<WrappingClass>(inputString);
+
+   		return desjson;
+   	}
+
+    void saveMethod(List<objectplaced> whattosave){
+
+    	//Debug.Log(Application.persistentDataPath);
         string savepath = (Application.persistentDataPath + saveFilepath);
 
-        string dataAsJson = JsonUtility.ToJson(whattosave);
+        var variable = new WrappingClass() { wraplist = whattosave};
 
-        File.WriteAllText(savepath + "data.json", dataAsJson);
+        string dataAsJson = JsonUtility.ToJson(variable);
+        var folder = Directory.CreateDirectory(savepath);
+
+        File.WriteAllText(savepath + prefab.name + ".json", dataAsJson);
     }
 
-	// Use this for initialization
-	void Start () {
+    void Placer(){
 
-        Vector3 defpos = new Vector3();
-        int layerMask = 9;
+    	if (load == true){
+    		var loadedData = loadMethod();
 
-        string name = this.name;
-        
-        for (int i = 1; i <= range * density; i++)
-        {
+    		for (int j = 1; j <= loadedData.wraplist.Count;j++){
+    			Debug.Log(j);
+    		}
+    	}
+    	else{
 
-            posran = new Vector3(Random.Range(-range, range), 0, Random.Range(-range, range));
+	    	Vector3 defpos = new Vector3();
+	        int layerMask = 9;
 
-            RaycastHit hit;
-            Ray downRay = new Ray(posran + new Vector3(0,10,0), Vector3.down*50);
+	        string name = this.name;
+	        
+	        for (int i = 1; i <= range * density; i++)
+	        {
 
+	            posran = new Vector3(Random.Range(-range, range), 0, Random.Range(-range, range));
 
-            if (Physics.Raycast(downRay, out hit, Mathf.Infinity, layerMask))
-            {
-                //Debug.Log("Hit");
-                defpos = posran + new Vector3(0,(10-hit.distance), 0);
-                //Debug.Log(hit.point);
-
-                if (rotation == true)
-                {
-                    //Vector3 newDir = Vector3.RotateTowards(Vector3.up, hit.normal,2.4f,0.0f);
-                    //transform.rotation = Quaternion.Euler(newDir);
-                    rot = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                }
-            }
-            else
-            {
-                //Debug.Log(i + "didn't hit");
-            }
-
-            //Updating list
-            objectplaced objgen = new objectplaced(prefab.name,i,defpos, rot);
-			objlist.Add(objgen);
-
-			//Debug.Log(objlist[1]);
-            //SaveMethod(objlist);
-
-			//Debug.Log(defpos);
-			//Instantiating prefab
-            Instantiate(prefab, defpos, rot);
+	            RaycastHit hit;
+	            Ray downRay = new Ray(posran + new Vector3(0,10,0), Vector3.down*50);
 
 
-        }
+	            if (Physics.Raycast(downRay, out hit, Mathf.Infinity, layerMask))
+	            {
+	                //Debug.Log("Hit");
+	                defpos = posran + new Vector3(0,(10-hit.distance), 0);
+	                //Debug.Log(hit.point);
 
-        
+	                if (rotation == true)
+	                {
+	                    rot = Quaternion.FromToRotation(Vector3.up, hit.normal);
+	                }
+	            }
+	            else
+	            {
+	            }
 
-        SaveMethod(objlist);
-         
-        //objectserialized = JsonUtility.ToJson(objlist);
-        
+	            //Updating list
+	            objectplaced objgen = new objectplaced(prefab.name,i,defpos, rot);
+				objlist.Add(objgen);
 
+				//Instantiating prefab
+	            Instantiate(prefab, defpos, rot);
+
+	            if (objlist.Contains(objgen)){
+	            	Debug.Log("YES" + i );
+	            }
+
+	        }
+        } 
     }
 
     // Update is called once per frame
