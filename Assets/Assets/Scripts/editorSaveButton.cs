@@ -18,10 +18,24 @@ public class editorSaveButton : Editor
         //populateScript myscript = (populateScript)target;
         //List<populateScript.objectplaced> objlist = loadedData.wraplist;
 
-        populateScript myScript = (populateScript)target;
+        populateScript popscript = (populateScript)target;
         if (GUILayout.Button("Save Placements"))
         {
-            myScript.saveMethod();
+            popscript.saveMethod();
         }
     }
 }
+
+// [CustomEditor(typeof(terrainScript))]
+// public class editorGenTerra : Editor
+// {
+//     public overrride void OnInspectorGUI()
+//     {
+//         Editor.DrawDefaultInspector();
+
+//         terrainScript ffscript = ()target;
+//         if (GUILayout.Button("Generate Terrain")){
+//             ffscript.Generate();
+//         }
+//     }
+// }

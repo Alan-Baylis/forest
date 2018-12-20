@@ -100,8 +100,6 @@ public class terrainScript : MonoBehaviour {
 
    
     void Update () {
-
-
 		
 	}
 }
