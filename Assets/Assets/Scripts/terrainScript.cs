@@ -14,6 +14,8 @@ public class terrainScript : MonoBehaviour {
     Vector3[] vertices;
     Vector2[] uvs;
 
+    public int chunks = 5;
+
     // Use this for initialization
     void Awake() {
 
@@ -26,6 +28,13 @@ public class terrainScript : MonoBehaviour {
 
         
         transform.position = new Vector3((-xSize / 2), transform.position.y,(- zSize / 2));
+
+        //for (int jx=0;jx<=chunks;jx++) {
+        //    for (int jz = 0;jz <= chunks;jz++) {
+        //        Generate(xSize*jx, zSize*jz);
+        //    }
+        //}
+
         Generate();
 
     }
@@ -40,14 +49,73 @@ public class terrainScript : MonoBehaviour {
 
 
 
-    [ExecuteInEditMode]
-    public void Generate()
-    {
-        Mesh terrainGeo = new Mesh();
+    //[ExecuteInEditMode]
+    //public void Generate()
+    //{
+    //    Mesh terrainGeo = new Mesh();
 
         
 
-        GetComponent<MeshFilter>().mesh = terrainGeo= new Mesh();
+    //    GetComponent<MeshFilter>().mesh = terrainGeo= new Mesh();
+    //    terrainGeo.name = "Terrain";
+
+    //    vertices = new Vector3[(xSize + 1) * (zSize + 1)];
+    //    for (int i = 0, z = 0; z <= zSize; z++)
+    //    {
+    //        for (int x = 0; x <= xSize; x++, i++)
+    //        {
+    //            float height = ynoise(x,z);
+    //            vertices[i] = new Vector3(x,height*10, z);
+    //        }
+    //    }
+    //    terrainGeo.vertices = vertices;
+
+    //    int[] triangles = new int[xSize * zSize * 6];
+    //    for (int ti = 0, vi = 0, z = 0; z < zSize; z++, vi++)
+    //    {
+    //        for (int x = 0; x < xSize; x++, ti += 6, vi++)
+    //        {
+    //            triangles[ti] = vi;
+    //            triangles[ti + 3] = triangles[ti + 2] = vi + 1;
+    //            triangles[ti + 4] = triangles[ti + 1] = vi + xSize + 1;
+    //            triangles[ti + 5] = vi + xSize + 2;
+    //        }
+    //    }
+
+    //    uvs = new Vector2[vertices.Length];
+
+    //    for (int i = 0, z = 0; z <= zSize; z++)
+    //    {
+    //        for (int x = 0; x <= xSize; x++, i++)
+    //        {
+    //            uvs[i] = new Vector2((float)x / xSize,(float) z / zSize);
+    //        }
+    //    }
+
+    //    terrainGeo.uv = uvs;
+    //    terrainGeo.triangles = triangles;
+    //    terrainGeo.RecalculateBounds();
+    //    terrainGeo.RecalculateNormals();
+
+
+
+    //    //Assigning MeshCollider
+    //    MeshCollider meshc = gameObject.AddComponent<MeshCollider>();
+    //    meshc.sharedMesh = terrainGeo;
+        
+
+
+    //}
+
+    [ExecuteInEditMode]
+    public void Generate(int xinit = 0, float zinit = 0)
+    {
+        
+       
+
+        Mesh terrainGeo = new Mesh();
+
+        GetComponent<MeshFilter>().mesh = terrainGeo = new Mesh();
         terrainGeo.name = "Terrain";
 
         vertices = new Vector3[(xSize + 1) * (zSize + 1)];
@@ -55,8 +123,8 @@ public class terrainScript : MonoBehaviour {
         {
             for (int x = 0; x <= xSize; x++, i++)
             {
-                float height = ynoise(x,z);
-                vertices[i] = new Vector3(x,height*10, z);
+                float height = ynoise(x, z);
+                vertices[i] = new Vector3(x+xinit, height * 10, z+zinit);
             }
         }
         terrainGeo.vertices = vertices;
@@ -79,7 +147,7 @@ public class terrainScript : MonoBehaviour {
         {
             for (int x = 0; x <= xSize; x++, i++)
             {
-                uvs[i] = new Vector2((float)x / xSize,(float) z / zSize);
+                uvs[i] = new Vector2((float)x / xSize, (float)z / zSize);
             }
         }
 
@@ -93,12 +161,12 @@ public class terrainScript : MonoBehaviour {
         //Assigning MeshCollider
         MeshCollider meshc = gameObject.AddComponent<MeshCollider>();
         meshc.sharedMesh = terrainGeo;
-        
+
 
 
     }
 
-   
+
     void Update () {
 		
 	}

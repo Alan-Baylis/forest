@@ -8,7 +8,7 @@ public class populateScript : MonoBehaviour {
 
 	//Saving 
 	public bool save = false;
-	public bool load = true;
+	public bool load = false;
 	public string saveFilepath = "/Save/";
 
 	//Prefab
