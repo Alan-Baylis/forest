@@ -66,6 +66,7 @@
     <Compile Include="Assets\Assets\Scripts\editorSaveButton.cs" />
     <Compile Include="Assets\Assets\Scripts\getVar.cs" />
     <Compile Include="Assets\Assets\Scripts\populateScript.cs" />
+    <Compile Include="Assets\Assets\Scripts\starter.cs" />
     <Compile Include="Assets\Assets\Scripts\terrainScript.cs" />
     <Compile Include="Assets\Assets\Scripts\treeRandomizer.cs" />
     <None Include="Assets\Assets\Shaders\vertexMovement.shader" />
